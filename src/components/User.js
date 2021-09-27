@@ -1,32 +1,23 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { userAction } from '../store';
+import { userActions } from '../store/user-slice';
 
 
 const User = () => {
 
-    const [data,getData] =useState()
-
-    const dispatch=useDispatch();
-    
-    
-    
-    const fetchData=async () =>{
+    const [data, getData] = useState();
+    const dispatch = useDispatch();
+    const fetchData = async () => {
         const response = await fetch('https://randomuser.me/api/');
-        const userData=await response.json();
+        const userData = await response.json();
         getData(userData.results[0]);
-        dispatch(userAction.getUser(data))
-        
+        dispatch(userActions.getUser(data));
     }
 
     useEffect(() => {
         fetchData();
-        
-    },[]);
-  
 
-    //console.log(data)
-    //console.log(person)
+    }, []);
 
     return (
         <div>
